@@ -9,19 +9,11 @@ router.use(express.json())
 router.get('/', async (req, res) => {
     const { searchTerm } = req.query
     try {
-        if (searchTerm) {
-            const boards = await prisma.board.findMany({
-                where: {
-                    title: {
-                        contains: searchTerm,
-                    },
-                }
-            });
-            res.json(boards);
-        } else {
-            const boards = await prisma.board.findMany();
-            res.json(boards);
-        }
+        const filters = searchTerm ? 
+        {where: {title:{contains: searchTerm}}} : {}
+        
+        const boards = await prisma.board.findMany(filters)
+        res.json(boards);
     } catch (err) {
         console.error('Error fetching boards:', err);
     }
@@ -35,7 +27,7 @@ router.post('/', async (req, res) => {
         });
         res.status(201).json(newBoard);
     } catch (err) {
-        console.error('Error fetching boards:', err);
+        console.error('Error deleting boards:', err);
     }
 })
 
@@ -48,7 +40,7 @@ router.delete('/:id', async (req, res) => {
 
         res.status(204).send()
     } catch (err) {
-        console.error('Error fetching boards:', err);
+        console.error('Error deleting boards:', err);
     }
 })
 
