@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
             });
             res.json(boards);
         } else {
-            console.log("here");
             const boards = await prisma.board.findMany();
             res.json(boards);
         }
@@ -53,6 +52,5 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.put
 
 export default router
