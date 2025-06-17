@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 })
 
-app.use('/board', boardRoutes);
+app.use('/api/boards', boardRoutes);
 
 app.listen(PORT, () => {
     console.log(`🚀Server is connected to http://localhost:${PORT}`)
