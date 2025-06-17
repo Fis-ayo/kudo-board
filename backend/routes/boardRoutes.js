@@ -5,36 +5,36 @@ const prisma = new PrismaClient();
 
 
 router.get('/', async (req, res) => {
-    try{
+    try {
         const board = await prisma.board.findMany();
         res.json(board);
-    } catch(err){
-        res.status(500).json({error: 'Failed to fetch board'});
+    } catch (err) {
+        console.error('Error fetching boards:', err);
     }
 })
 
 router.post('/', async (req, res) => {
     const { category, author } = req.body;
     try {
-    const newBoard = await prisma.board.create({
-        data: { category, author}
-    });
-    res.status(201).json(newBoard);
-    } catch(err){
-        res.status(500).json({error: 'Failed to create board'});
+        const newBoard = await prisma.board.create({
+            data: { category, author }
+        });
+        res.status(201).json(newBoard);
+    } catch (err) {
+        console.error('Error fetching boards:', err);
     }
 })
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     const { id } = req.params
-    try{
-    const deleteBoard = await prisma.board.delete({
-        where: {id: parseInt(id)}
-    })
+    try {
+        const deleteBoard = await prisma.board.delete({
+            where: { id: parseInt(id) }
+        })
 
-    res.status(204).send()
-    }catch(err){
-        res.status(500).json({error: 'Failed to delete board'});
+        res.status(204).send()
+    } catch (err) {
+        console.error('Error fetching boards:', err);
     }
 })
 
