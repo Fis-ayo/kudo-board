@@ -1,13 +1,19 @@
+import cors from 'cors'
 import express from 'express'
-const router = express.Router();
-import { PrismaClient } from '../generated/prisma/index.js';
-const prisma = new PrismaClient();
+import prisma from '../utils/prisma_client.js'
 
+const router = express.Router();
+router.use(cors())
+router.use(express.json())
 
 router.get('/', async (req, res) => {
+    const { searchTerm } = req.query
     try {
-        const board = await prisma.board.findMany();
-        res.json(board);
+        const filters = searchTerm ? 
+        {where: {title:{contains: searchTerm}}} : {}
+
+        const boards = await prisma.board.findMany(filters)
+        res.json(boards);
     } catch (err) {
         console.error('Error fetching boards:', err);
     }
@@ -21,21 +27,22 @@ router.post('/', async (req, res) => {
         });
         res.status(201).json(newBoard);
     } catch (err) {
-        console.error('Error fetching boards:', err);
+        console.error('Error creating board:', err);
     }
 })
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params
+    const id  = parseInt(req.params.id)
     try {
         const deleteBoard = await prisma.board.delete({
-            where: { id: parseInt(id) }
+            where: { id }
         });
 
         res.status(204).send()
     } catch (err) {
-        console.error('Error fetching boards:', err);
+        console.error('Error deleting boards:', err);
     }
 })
+
 
 export default router
