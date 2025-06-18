@@ -12,7 +12,17 @@ const cardApi = createApiInstance('http://localhost:3000/api/cards');
 export const getBoards = async() => {
     try {
         const response = await boardApi.get('/');
-        return response.data()
+        return response.data;
+    } catch(err){
+        console.error("Error in fetching board", err);
+        throw err;
+    }
+}
+
+export const searchBoard = async(query) => {
+    try {
+        const response = await boardApi.get(`?search=${query}`);
+        return response.data;
     } catch(err){
         console.error("Error in fetching board", err);
         throw err;
@@ -34,7 +44,7 @@ export const createBoard = async(title, category, author) => {
     };
     axios(options)
         .then(response => {
-            return response.data()
+            return response.data;
         })
         .catch(err => {
             console.error(err);
@@ -44,7 +54,7 @@ export const createBoard = async(title, category, author) => {
 export const deleteBoard = async(boardId) => {
     try {
         const response = await boardApi.delete(`/${boardId}`);
-        return response.data()
+        return response.data;
     } catch(err){
         console.error("Error in deleting board", err);
         throw err;
@@ -67,7 +77,7 @@ export const createCard = async(boardId, title, description, owner) => {
     };
     axios(options)
         .then(response => {
-            return response.data()
+            return response.data;
         })
         .catch(err => {
             console.error(err);
@@ -77,7 +87,7 @@ export const createCard = async(boardId, title, description, owner) => {
 export const deleteCard = async(cardId) => {
     try {
         const response = await cardApi.delete(`/${cardId}`);
-        return response.data()
+        return response.data;
     } catch(err){
         console.error("Error in deleting card", err);
         throw err;
