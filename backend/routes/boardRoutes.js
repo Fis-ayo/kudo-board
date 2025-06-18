@@ -20,10 +20,10 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const { category, author } = req.body;
+    const { title, category, author } = req.body;
     try {
         const newBoard = await prisma.board.create({
-            data: { category, author }
+            data: { title, category, author }
         });
         res.status(201).json(newBoard);
     } catch (err) {
