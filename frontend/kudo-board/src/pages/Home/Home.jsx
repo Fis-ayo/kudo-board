@@ -7,7 +7,7 @@ import "./Home.css";
 
 export default function Home() {
     const [boards, setBoards] = useState([]);
-    const [emptyMessage, setEmptyMessage] = useState("")
+    const [emptyMessage, setEmptyMessage] = useState("");
 
     const getData = async () => {
         const results = await getBoards();
