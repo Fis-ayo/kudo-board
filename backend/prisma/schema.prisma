@@ -17,8 +17,9 @@ datasource db {
 model Board {
   id    Int     @id @default(autoincrement())
   createAt    DateTime    @default(now())
+  title       String
   category    String
-  author    String
+  author    String?
   cards    Card[]
 }
 
@@ -26,7 +27,6 @@ model Card {
   id    Int    @id @default(autoincrement())
   title    String     @db.VarChar(255)
   description   String
-  GIF_search    String
   GIF_URL       String
   owner         String? @default("Anonymous")
   boardId       Int
