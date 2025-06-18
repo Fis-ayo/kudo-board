@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const createApiInstance = (baseUrl) => {
+const createApiInstance = (baseURL) => {
     return axios.create({
-        baseUrl,
+        baseURL,
     });
 }
 
@@ -12,6 +12,7 @@ const cardApi = createApiInstance('http://localhost:3000/api/cards');
 export const getBoards = async() => {
     try {
         const response = await boardApi.get('/');
+        console.log(response);
         return response.data;
     } catch(err){
         console.error("Error in fetching board", err);

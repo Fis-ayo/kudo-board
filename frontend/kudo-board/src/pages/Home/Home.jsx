@@ -11,6 +11,7 @@ export default function Home() {
 
     const getData = async () => {
         const results = await getBoards();
+        console.log(results);
         setBoards(results);
     };
 
@@ -35,7 +36,7 @@ export default function Home() {
             {emptyMessage ?
                 (<p>{emptyMessage}</p>) :
                 (<BoardList
-                    board={boards}
+                    boards={boards}
                     setBoards={setBoards}
                 />
                 )}

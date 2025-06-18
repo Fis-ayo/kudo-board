@@ -1,6 +1,6 @@
-import "./NavigationBar.css"
+import "./FilterBoards.css"
 
-export default function NavigationBar() {
+export default function FilterBoards() {
     return (
         <nav className="">
             <div className="top-nav">
