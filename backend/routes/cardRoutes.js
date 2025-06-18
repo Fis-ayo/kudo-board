@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 
         res.status(201).json(newCard);
     } catch (err) {
-        console.error('Error creating cards:', err);
+        console.error('Error creating card:', err);
     }
 })
 
