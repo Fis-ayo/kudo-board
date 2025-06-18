@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { getGifUrl } from "../../services/apiGif"
 
 export default function BoardCard({ item }) {
-    const [gifUrl, setGifUrl] = useState('');
+    const [gifUrl, setGifUrl] = useState(null);
 
     useEffect(() => {
         const fetchGif = async () => {
