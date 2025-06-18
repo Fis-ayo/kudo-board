@@ -1,16 +1,31 @@
+import { useEffect, useState } from "react"
 import "./Board.css"
+import { Link } from "react-router-dom"
+import { getGifUrl } from "../../services/apiGif"
 
-export default function BoardCard() {
+export default function BoardCard({ item }) {
+    const [gifUrl, setGifUrl] = useState('');
+
+    useEffect(() => {
+        const fetchGif = async () => {
+            const url = await getGifUrl();
+            setGifUrl(url);
+        };
+        fetchGif();
+    }, []);
     return (
         <div className="board-preview">
             <img
-                src={'https://picsum.photos/200/300'}
-                alt={"Photo Alt"}
+                className="board-img-gif"
+                src={gifUrl}
+                alt={item.title + 'board Gif'}
             />
-            <h3></h3>
-            <p></p>
+            <h3>{item.title}</h3>
+            <p>{item.category}</p>
             <div className="board-actions">
-                <a></a>
+                <Link to="frontend/kudo-board/src/pages/Board/BoardCard.jsx">
+                    <button>View Board</button>
+                </Link>
                 <button>Delete Board</button>
             </div>
         </div>
