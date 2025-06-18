@@ -23,8 +23,9 @@ export default function BoardCard({ item }) {
             <h3>{item.title}</h3>
             <p>{item.category}</p>
             <div className="board-actions">
-                <Link to="frontend/kudo-board/src/pages/Board/BoardCard.jsx">
-                    <button>View Board</button>
+                <Link 
+                to={`api/boards/${item.id}`} state={{title:item.title}}>
+                    View Board
                 </Link>
                 <button>Delete Board</button>
             </div>

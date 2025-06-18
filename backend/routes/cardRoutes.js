@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const {boardId, title, description, owner, GIF_search, GIF_URL} = req.body;
+    const {boardId, title, description, owner} = req.body;
 
     try {
         const newCard = await prisma.card.create({
@@ -24,9 +24,7 @@ router.post('/', async (req, res) => {
                 boardId,
                 title,
                 description,
-                owner,
-                GIF_search,
-                GIF_URL
+                owner
             }
         });
 
