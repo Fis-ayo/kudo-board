@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     try {
         const filters = searchTerm ? 
         {where: {title:{contains: searchTerm}}} : {}
-        
+
         const boards = await prisma.board.findMany(filters)
         res.json(boards);
     } catch (err) {
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
         });
         res.status(201).json(newBoard);
     } catch (err) {
-        console.error('Error deleting boards:', err);
+        console.error('Error creating board:', err);
     }
 })
 

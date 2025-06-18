@@ -11,12 +11,13 @@ router.get('/', async (req, res) => {
         const cards = await prisma.card.findMany();
         res.json(cards);
     } catch (err) {
-        console.error('Error fetching boards:', err);
+        console.error('Error fetching card:', err);
     }
 })
 
 router.post('/', async (req, res) => {
     const {boardId, title, description, owner, GIF_search, GIF_URL} = req.body;
+
     try {
         const newCard = await prisma.card.create({
             data: {
@@ -28,9 +29,10 @@ router.post('/', async (req, res) => {
                 GIF_URL
             }
         });
+
         res.status(201).json(newCard);
     } catch (err) {
-        console.error('Error fetching cardss:', err);
+        console.error('Error creating cards:', err);
     }
 })
 
@@ -43,7 +45,7 @@ router.delete('/:id', async (req, res) => {
 
         res.status(204).send()
     } catch (err) {
-        console.error('Error fetching boards:', err);
+        console.error('Error deleting boards:', err);
     }
 })
 
