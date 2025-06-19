@@ -6,17 +6,38 @@ const router = express.Router();
 router.use(cors());
 router.use(express.json())
 
-router.get('/', async (req, res) => {
+router.get('/:boardId/cards', async (req, res) => {
+    const boardId = parseInt(req.params.boardId);
     try {
-        const cards = await prisma.card.findMany();
+        const cards = await prisma.card.findMany({
+            where:{
+                boardId
+            }
+        });
         res.json(cards);
+    } catch (err) {
+        console.error('Error fetching cards:', err);
+    }
+})
+
+router.get('/:boardId/cards/:cardId', async (req, res) => {
+    const {boardId, cardId} = req.params
+    try {
+        const card = await prisma.card.findMany({
+            where:{
+                boardId,
+                id: cardId
+            }
+        });
+        res.json(card);
     } catch (err) {
         console.error('Error fetching card:', err);
     }
 })
 
-router.post('/', async (req, res) => {
-    const {boardId, title, description, owner} = req.body;
+router.post('/:boardId/cards', async (req, res) => {
+    const {boardId} = req.params
+    const {title, description, owner} = req.body;
 
     try {
         const newCard = await prisma.card.create({
@@ -34,11 +55,13 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
-    const id = parseInt(req.params.id)
+router.delete('/:boardId/cards/:id', async (req, res) => {
+    const {cardId} = req.params
     try {
         const deleteCard = await prisma.card.delete({
-            where: { id }
+            where:{
+                id: cardId
+            }
         });
 
         res.status(204).send()
