@@ -1,0 +1,81 @@
+:root {
+    --modal-bg: rgba(0, 0, 0, 0.85);
+    --modal-main: #1f1f1f;
+}
+
+.modal-overlay {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 2rem;
+    background-color: var(--modal-bg);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+    background-color: var(--modal-main);
+    color: white;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    height: auto;
+    border-radius: 16px;
+    max-width: 900px;
+    max-height: 90vh;
+    box-shadow: 0 4px 8px rgba(173, 169, 169, 0.85);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--main-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.gifs-container {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .modal-top-content {
+        flex-direction: column;
+    }
+
+    .modal-img {
+        max-height: 200px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+}
+
+.gifs-container{
+    display: flex;
+    max-width: 500px;
+}
+
+.gifs-container img {
+    width: 150px;
+    height: 150px;
+}
