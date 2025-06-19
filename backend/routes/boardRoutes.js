@@ -19,6 +19,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    const id  = parseInt(req.params.id)
+    try {
+        const board = await prisma.board.findUnique({
+            where: {
+                id
+            }
+        })
+        res.json(board);
+    } catch (err) {
+        console.error('Error fetching board:', err);
+    }
+})
+
 router.post('/', async (req, res) => {
     const { title, category, author } = req.body;
     try {
@@ -40,7 +54,7 @@ router.delete('/:id', async (req, res) => {
 
         res.status(204).send()
     } catch (err) {
-        console.error('Error deleting boards:', err);
+        console.error('Error deleting board:', err);
     }
 })
 
