@@ -1,0 +1,84 @@
+.board-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.board-card:hover {
+    transform: translateY(-4px);
+}
+
+body.dark .board-card {
+    background: #2a2a2a;
+    color: #f4f4f4;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+.board-img-gif {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.board-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.board-content h3 {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 600;
+}
+
+.board-content p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+body.dark .board-content p {
+    color: #aaa;
+}
+
+.board-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.board-actions button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.view-btn {
+    background-color:var(--hover-color) ;
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: var(--main-color);
+}
+
+.del-btn {
+    background-color: #b81908;
+    color: white;
+}
+
+.del-btn:hover {
+    background-color: #ef6b5d;
+    color: black;
+}

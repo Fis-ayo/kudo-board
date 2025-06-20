@@ -1,0 +1,35 @@
+.search-container {
+    display: flex;
+    gap: 8px;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 40px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .search-container {
+    background: #2a2a2a;
+}
+
+.search-input {
+    padding: 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+}
+
+.button {
+    background-color: #013d7c;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.button:hover{
+    background-color: #93bae4;
+    color: black;
+}

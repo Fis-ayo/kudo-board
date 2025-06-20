@@ -1,0 +1,19 @@
+.toolbar-container {
+    width: 100vh;
+    padding: 24px;
+    margin-top: 64px;
+    border-bottom: 1px solid #ddd;
+}
+
+body.dark .toolbar-container {
+    border-bottom: 1px solid #ffffff;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+}

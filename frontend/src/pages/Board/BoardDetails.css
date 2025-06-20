@@ -1,0 +1,28 @@
+.backHome {
+    padding: 16px 32px 0;
+    margin-top: 64px;
+}
+
+.backHome a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--hover-color);
+    transition: color 0.2s;
+}
+
+.backHome a:hover {
+    color: black;
+}
+
+body.dark .backHome a {
+    color:white;
+}
+
+body.dark .backHome a:hover {
+    color: var(--main-color);
+}

@@ -22,33 +22,40 @@ export default function Home() {
     }, []);
 
     const handleSearch = async (query) => {
+        if (!query) {
+            setBoards(allBoards);
+            setEmptyMessage('');
+            return;
+        }
         const results = await searchBoard(query);
         if (results.length === 0) setEmptyMessage("No boards available");
-        else setBoards(results);
+        else setEmptyMessage('');
+
+        setBoards(results);
     };
 
     const handleFilter = () => {
-        const results  = allBoards.slice();
+        const results = allBoards.slice();
 
-        if(filterOption === "All"){
+        if (filterOption === "All") {
             getData();
             return
         };
 
-        if(filterOption === "Recent") {
-            const sorted = results.sort((a,b) => b.id-a.id);
+        if (filterOption === "Recent") {
+            const sorted = results.sort((a, b) => b.id - a.id);
             setBoards(sorted);
             return;
         };
 
         const categoryMap = {
-            "Celebration":"celebration",
-            "Thank You":"thank",
-            "Inspiration":"inspiration"
+            "Celebration": "celebration",
+            "Thank You": "thank",
+            "Inspiration": "inspiration"
         };
 
         const categoryValue = categoryMap[filterOption];
-        if(categoryValue) {
+        if (categoryValue) {
             const filtered = results.filter(board => board.category === categoryValue);
             setBoards(filtered);
         }
@@ -61,10 +68,10 @@ export default function Home() {
     return (
         <main>
             <section className="toolbar-container">
-                <SearchBar
-                    onSearch={handleSearch}
-                />
-                <FilterBoards setFilterOption={setFilterOption} />
+                <div className="toolbar">
+                    <SearchBar onSearch={handleSearch} />
+                    <FilterBoards setFilterOption={setFilterOption} />
+                </div>
             </section>
             {emptyMessage ?
                 (<p>{emptyMessage}</p>) :
