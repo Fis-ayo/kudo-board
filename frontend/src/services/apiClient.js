@@ -1,13 +1,23 @@
 import axios from 'axios'
 
+const getBaseURL = () => {
+    let result;
+    if(import.meta.env.VITE_DEVELOPMENT){
+        result='http://localhost:3000'
+    }else{
+        result='https://kudoboardservice.onrender.com/'
+    }
+    return result;
+}
+
 const createApiInstance = (baseURL) => {
     return axios.create({
         baseURL,
     });
 }
 
-const boardApi = createApiInstance('http://localhost:3000/api/boards');
-const cardApi = createApiInstance('http://localhost:3000/api/boards');
+const boardApi = createApiInstance(`${getBaseURL()}/api/boards`);
+const cardApi = createApiInstance(`${getBaseURL()}/api/boards`);
 
 export const getBoards = async () => {
     try {
@@ -32,7 +42,7 @@ export const searchBoard = async (query) => {
 export const createBoard = async (title, category, author) => {
     const options = {
         method: 'POST',
-        url: 'http://localhost:3000/api/boards',
+        url: `${getBaseURL()}/api/boards`,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -61,7 +71,7 @@ export const deleteBoard = async (boardId) => {
     }
 }
 
-const BASE_URL = 'http://localhost:3000/api/boards';
+const BASE_URL = `${getBaseURL()}/api/boards`;
 
 export const getCards = async (boardId) => {
     const url = `${BASE_URL}/${boardId}/cards`;
