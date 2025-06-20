@@ -43,7 +43,7 @@ export default function Home() {
 
         const categoryMap = {
             "Celebration":"celebration",
-            "Thank You":"thank you",
+            "Thank You":"thank",
             "Inspiration":"inspiration"
         };
 
