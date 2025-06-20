@@ -21,7 +21,7 @@ export default function BoardList({ boards, setBoards }) {
             <button
                 onClick={handleBoardClick}
                 className="newBoard">
-                Create a New Board
+                + New Board
             </button>
             <section className="boardList-container">
                 {boards.map((board) => (

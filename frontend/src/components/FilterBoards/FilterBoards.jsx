@@ -2,7 +2,7 @@ import "./FilterBoards.css"
 
 export default function FilterBoards({setFilterOption}) {
     return (
-        <nav className="">
+        <nav>
             <div className="top-nav">
                 <button onClick={()=> setFilterOption("All")}>All</button>
                 <button onClick={()=> setFilterOption("Recent")}>Recent</button>

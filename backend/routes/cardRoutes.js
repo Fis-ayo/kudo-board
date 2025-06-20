@@ -36,7 +36,7 @@ router.get('/:boardId/cards/:cardId', async (req, res) => {
 })
 
 router.put('/:boardId/cards/:cardId/pinned', async (req, res) => {
-    const id = parseInt(req.params.boardId);
+    const id = parseInt(req.params.cardId);
     try {
         const cardExists = await prisma.card.findUnique({
             where: { id }

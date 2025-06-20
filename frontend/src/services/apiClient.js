@@ -21,7 +21,7 @@ export const getBoards = async () => {
 
 export const searchBoard = async (query) => {
     try {
-        const response = await boardApi.get(`?search=${query}`);
+        const response = await boardApi.get(`?searchTerm=${query}`);
         return response.data;
     } catch (err) {
         console.error("Error in fetching board", err);
@@ -109,6 +109,16 @@ export const upVote = async (boardId, cardId) => {
     }
 }
 
+export const getPin = async (boardId, cardId) => {
+    try {
+        const data = await cardApi.put(`/${boardId}/cards/${cardId}/pinned`);
+        return data;
+    } catch (err) {
+        console.error("Error in deleting card", err);
+        throw err;
+    }
+}
+
 export const deleteCard = async (boardId, cardId) => {
     try {
         const response = await cardApi.delete(`/${boardId}/cards/${cardId}`);
@@ -153,12 +163,4 @@ export const createComment = async (boardId, cardId, text, author) => {
     }
 }
 
-export const getPin = async (boardId, cardId) => {
-    try {
-        const data = await cardApi.put(`/${boardId}/cards/${cardId}/pinned`);
-        return data;
-    } catch (err) {
-        console.error("Error in deleting card", err);
-        throw err;
-    }
-}
+

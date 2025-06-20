@@ -3,6 +3,8 @@ import NewComment from "../CommentModal/NewComment";
 import "./Card.css";
 import { getPin } from "../../services/apiClient";
 import { useParams } from "react-router";
+import { BsFillHandThumbsUpFill } from "react-icons/bs";
+import {FaThumbtack, FaComments, FaTrashAlt} from 'react-icons/fa'
 
 export default function Card({ item, onVote, onDelete, onUpdate }) {
     const [vote, setVote] = useState(item.vote_count);
@@ -30,17 +32,28 @@ export default function Card({ item, onVote, onDelete, onUpdate }) {
     }
 
     return (
-        <div>
-            <button onClick={handlePinClick}>
-                {isPinned ? "unpin" : "Pin" }
-            </button>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <button onClick={handleCommentClick}>Comments</button>
-            <img src={item.GIF_URL} />
+        <div className="card">
+            <div className="img-wrapper">
+                <img className="card-img" src={item.GIF_URL} />
+                <div className="overlay-icons">
+                    <button className="icon pin-btn" onClick={handlePinClick} title={isPinned ? "unpin" : "Pin"}>
+                        <FaThumbtack className={isPinned ? 'pinned' : ''} />
+                    </button>
+                    <button className="icon comment-btn" onClick={handleCommentClick} title="Comments">
+                        <FaComments />
+                    </button>
+                </div>
+            </div>
+
+            <div className="card-content">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+            </div>
+
+
             <div className="card-actions">
-                <button onClick={handleVote}>👍🏾 Upvote: {vote}</button>
-                <button onClick={onDelete} className="delete-btn">Delete</button>
+                <button onClick={handleVote} className="vote-btn"><BsFillHandThumbsUpFill />Upvote: {vote}</button>
+                <button onClick={onDelete} className="delete-btn"><FaTrashAlt />Delete</button>
             </div>
 
             {addComment &&

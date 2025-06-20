@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./SearchBar.css"
 
 export default function SearchBar({ onSearch }) {
-    const [searchQuery, setSearchQuery] = useState();
+    const [searchQuery, setSearchQuery] = useState(" ");
 
     const handleSearchChange = (e) =>{
         setSearchQuery(e.target.value);
@@ -26,7 +26,7 @@ export default function SearchBar({ onSearch }) {
         }
     }
 
-    const handleClear = (e) => {
+    const handleClear = () => {
         setSearchQuery("");
         onSearch("");
     };
@@ -38,7 +38,7 @@ export default function SearchBar({ onSearch }) {
                 className="search-input"
                 placeholder="Search boards..."
                 value={searchQuery}
-                onChange={handleSearchChange}
+                onChange={(handleSearchChange)}
                 onKeyDown={handleKeyPress}
             />
             <button type="submit" className="button search-btn">Search</button>
