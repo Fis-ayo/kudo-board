@@ -5,7 +5,7 @@ const getBaseURL = () => {
     if(import.meta.env.DEV){
         result='http://localhost:3000'
     }else{
-        result='https://kudoboardservice.onrender.com/'
+        result='https://kudoboardservice.onrender.com'
     }
     return result;
 }
