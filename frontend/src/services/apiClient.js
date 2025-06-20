@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const getBaseURL = () => {
     let result;
-    if(import.meta.env.VITE_DEVELOPMENT){
+    if(import.meta.env.DEV){
         result='http://localhost:3000'
     }else{
         result='https://kudoboardservice.onrender.com/'
