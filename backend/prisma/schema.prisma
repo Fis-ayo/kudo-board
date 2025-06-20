@@ -26,10 +26,21 @@ model Board {
 model Card {
   id    Int    @id @default(autoincrement())
   title    String     @db.VarChar(255)
-  description   String
+  description   String    
   GIF_URL       String
   owner         String? @default("Anonymous")
   boardId       Int
-  board Board?    @relation(fields: [boardId], references:[id])
+  board Board?   @relation(fields: [boardId], references:[id])
   vote_count    Int @default(0)
+  pinned        Boolean?    @default(false)
+  comments      Comment[]
+}
+
+model Comment {
+  id    Int    @id @default(autoincrement())
+  author    String?
+  text      String
+  cardId    Int
+  card Card    @relation(fields: [cardId], references:[id])
+  createAt    DateTime    @default(now())
 }

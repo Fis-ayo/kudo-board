@@ -7,89 +7,157 @@ const createApiInstance = (baseURL) => {
 }
 
 const boardApi = createApiInstance('http://localhost:3000/api/boards');
-const cardApi = createApiInstance('http://localhost:3000/api/cards');
+const cardApi = createApiInstance('http://localhost:3000/api/boards');
 
-export const getBoards = async() => {
+export const getBoards = async () => {
     try {
         const response = await boardApi.get('/');
-        console.log(response);
         return response.data;
-    } catch(err){
+    } catch (err) {
         console.error("Error in fetching board", err);
         throw err;
     }
 }
 
-export const searchBoard = async(query) => {
+export const searchBoard = async (query) => {
     try {
         const response = await boardApi.get(`?search=${query}`);
         return response.data;
-    } catch(err){
+    } catch (err) {
         console.error("Error in fetching board", err);
         throw err;
     }
 }
 
-export const createBoard = async(title, category, author) => {
+export const createBoard = async (title, category, author) => {
     const options = {
         method: 'POST',
         url: 'http://localhost:3000/api/boards',
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
-        body: {
+        data: {
             title,
             category,
             author
         }
     };
-    axios(options)
-        .then(response => {
-            return response.data;
-        })
-        .catch(err => {
-            console.error(err);
-        })
+    try {
+        const response = await axios(options);
+        return response.data;
+    } catch (err) {
+        console.error("Error creating board", err);
+        throw err;
+    }
 }
 
-export const deleteBoard = async(boardId) => {
+export const deleteBoard = async (boardId) => {
     try {
         const response = await boardApi.delete(`/${boardId}`);
         return response.data;
-    } catch(err){
+    } catch (err) {
         console.error("Error in deleting board", err);
         throw err;
     }
 }
 
-export const createCard = async(boardId, title, description, owner) => {
-    const options = {
-        method: 'POST',
-        url: 'http://localhost:3000/api/boards',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        body: {
-            boardId, 
-            title, 
-            description, 
-            owner
-        }
-    };
-    axios(options)
-        .then(response => {
-            return response.data;
-        })
-        .catch(err => {
-            console.error(err);
-        })
+const BASE_URL = 'http://localhost:3000/api/boards';
+
+export const getCards = async (boardId) => {
+    const url = `${BASE_URL}/${boardId}/cards`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`${response.status}, Error fetching cards`);
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.error("Error fetching cards", err)
+    }
 }
 
-export const deleteCard = async(cardId) => {
+export const createCard = async (boardId, title, description, owner, GIF_URL) => {
+    const options = {
+        method: 'POST',
+        url: `${BASE_URL}/${boardId}/cards`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            boardId,
+            title,
+            description,
+            owner,
+            GIF_URL
+        }
+    };
     try {
-        const response = await cardApi.delete(`/${cardId}`);
+        const response = await axios(options);
         return response.data;
-    } catch(err){
+    } catch (err) {
+        console.error("Error creating card", err);
+        throw err;
+    }
+}
+
+export const upVote = async (boardId, cardId) => {
+    try {
+        const response = await cardApi.patch(`/${boardId}/cards/${cardId}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error in deleting card", err);
+        throw err;
+    }
+}
+
+export const deleteCard = async (boardId, cardId) => {
+    try {
+        const response = await cardApi.delete(`/${boardId}/cards/${cardId}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error in deleting card", err);
+        throw err;
+    }
+}
+
+export const getComments = async (boardId, cardId) => {
+    const url = `${BASE_URL}/${boardId}/cards/${cardId}/comments`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`${response.status}, Error fetching comments`);
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.error("Error fetching comments", err)
+    }
+}
+
+export const createComment = async (boardId, cardId, text, author) => {
+    const options = {
+        method: 'POST',
+        url: `${BASE_URL}/${boardId}/cards/${cardId}/comments`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            cardId,
+            text,
+            author
+        }
+    };
+    try {
+        const response = await axios(options);
+        return response.data;
+    } catch (err) {
+        console.error("Error creating card", err);
+        throw err;
+    }
+}
+
+export const getPin = async (boardId, cardId) => {
+    try {
+        const data = await cardApi.put(`/${boardId}/cards/${cardId}/pinned`);
+        return data;
+    } catch (err) {
         console.error("Error in deleting card", err);
         throw err;
     }

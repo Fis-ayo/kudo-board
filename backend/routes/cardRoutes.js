@@ -10,7 +10,7 @@ router.get('/:boardId/cards', async (req, res) => {
     const boardId = parseInt(req.params.boardId);
     try {
         const cards = await prisma.card.findMany({
-            where:{
+            where: {
                 boardId
             }
         });
@@ -21,12 +21,12 @@ router.get('/:boardId/cards', async (req, res) => {
 })
 
 router.get('/:boardId/cards/:cardId', async (req, res) => {
-    const {boardId, cardId} = req.params
+    const { boardId, cardId } = req.params;
     try {
         const card = await prisma.card.findMany({
-            where:{
-                boardId,
-                id: cardId
+            where: {
+                boardId: parseInt(boardId),
+                id: parseInt(cardId)
             }
         });
         res.json(card);
@@ -35,17 +35,37 @@ router.get('/:boardId/cards/:cardId', async (req, res) => {
     }
 })
 
+router.put('/:boardId/cards/:cardId/pinned', async (req, res) => {
+    const id = parseInt(req.params.boardId);
+    try {
+        const cardExists = await prisma.card.findUnique({
+            where: { id }
+        });
+        if (!cardExists) {
+            return res.status(404).json({ error: 'Card not found' });
+        }
+        const updated = await prisma.card.update({
+            where: { id },
+            data: { pinned: !cardExists.pinned }
+        });
+        res.json(updated);
+    } catch (err) {
+        console.error('Error getting pinned card', err);
+    }
+})
+
 router.post('/:boardId/cards', async (req, res) => {
-    const {boardId} = req.params
-    const {title, description, owner} = req.body;
+    const id = parseInt(req.params.boardId);
+    const { title, description, owner, GIF_URL } = req.body;
 
     try {
         const newCard = await prisma.card.create({
             data: {
-                boardId,
+                boardId: id,
                 title,
                 description,
-                owner
+                owner,
+                GIF_URL
             }
         });
 
@@ -55,16 +75,30 @@ router.post('/:boardId/cards', async (req, res) => {
     }
 })
 
-router.delete('/:boardId/cards/:id', async (req, res) => {
-    const {cardId} = req.params
+router.patch('/:boardId/cards/:cardId', async (req, res) => {
+    const cardId = parseInt(req.params.cardId);
     try {
-        const deleteCard = await prisma.card.delete({
-            where:{
+        await prisma.card.update({
+            where: { id: cardId },
+            data: {
+                vote_count: { increment: 1 }
+            }
+        })
+        res.status(204).send();
+    } catch (err) {
+        console.error('Error updating vote: ', err)
+    }
+})
+
+router.delete('/:boardId/cards/:cardId', async (req, res) => {
+    const cardId = parseInt(req.params.cardId);
+    try {
+        await prisma.card.delete({
+            where: {
                 id: cardId
             }
         });
-
-        res.status(204).send()
+        res.status(204).send();
     } catch (err) {
         console.error('Error deleting boards:', err);
     }

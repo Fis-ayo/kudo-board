@@ -45,37 +45,3 @@
     text-decoration: none;
     cursor: pointer;
 }
-
-.card-title {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.gifs-container {
-    display: flex;
-}
-
-@media (max-width: 768px) {
-    .modal-top-content {
-        flex-direction: column;
-    }
-
-    .modal-img {
-        max-height: 200px;
-    }
-
-    .modal-title {
-        font-size: 1.5rem;
-    }
-
-}
-
-.gifs-container{
-    display: flex;
-    max-width: 500px;
-}
-
-.gifs-container img {
-    width: 150px;
-    height: 150px;
-}

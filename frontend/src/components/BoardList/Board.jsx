@@ -3,7 +3,7 @@ import "./Board.css"
 import { Link } from "react-router-dom"
 import { getGifUrl } from "../../services/apiGif"
 
-export default function BoardCard({ item }) {
+export default function BoardCard({item, onDelete }) {
     const [gifUrl, setGifUrl] = useState(null);
 
     useEffect(() => {
@@ -13,6 +13,7 @@ export default function BoardCard({ item }) {
         };
         fetchGif();
     }, []);
+
     return (
         <div className="board-preview">
             <img
@@ -27,7 +28,7 @@ export default function BoardCard({ item }) {
                 to={`/board/${item.id}`} state={{title:item.title}}>
                     View Board
                 </Link>
-                <button>Delete Board</button>
+                <button onClick={onDelete}>Delete Board</button>
             </div>
         </div>
     )

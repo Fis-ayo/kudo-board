@@ -1,16 +1,15 @@
 import "./FilterBoards.css"
 
-export default function FilterBoards() {
+export default function FilterBoards({setFilterOption}) {
     return (
         <nav className="">
             <div className="top-nav">
-                <button>All</button>
-                <button>Recent</button>
-                <button>Celebration</button>
-                <button>Thank You</button>
-                <button>Inspiration</button>
+                <button onClick={()=> setFilterOption("All")}>All</button>
+                <button onClick={()=> setFilterOption("Recent")}>Recent</button>
+                <button onClick={()=> setFilterOption("Celebration")}>Celebration</button>
+                <button onClick={()=> setFilterOption("Thank You")}>Thank You</button>
+                <button onClick={()=> setFilterOption("Inspiration")}>Inspiration</button>
             </div>
-            <button className="bottom-nav">Create New Board</button>
         </nav>
     )
 }

@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const id  = parseInt(req.params.id)
     try {
-        const deleteBoard = await prisma.board.delete({
+        await prisma.board.delete({
             where: { id }
         });
 
