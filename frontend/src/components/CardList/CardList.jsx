@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { deleteCard, upVote } from "../../services/apiClient";
 import { useParams } from "react-router";
 
-export default function CardList({ cards, setCards }) {
+export default function CardList({ cards, setCards, onUpdate }) {
     const [clickedCard, setClickedCard] = useState(false);
     const params = useParams();
 
@@ -22,6 +22,13 @@ export default function CardList({ cards, setCards }) {
         await upVote(params.id, cardId);
     }
 
+    const sortPinned = [...cards].sort((a, b) => {
+        if(a.pinned === b.pinned) {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        }
+        return b.pinned-a.pinned;
+    })
+
     return (
         <div>
             <button
@@ -30,12 +37,13 @@ export default function CardList({ cards, setCards }) {
                 Create a New Card
             </button>
             <section className="cardList-container">
-                {cards.map((card) => (
+                {sortPinned.map((card) => (
                     <Card
                         key={card.id}
                         item={card}
                         onDelete={() => handleCardDelete(card.id)}
                         onVote={() => handleUpVote(card.id)}
+                        onUpdate = {onUpdate}
                     />
                 ))}
             </section>

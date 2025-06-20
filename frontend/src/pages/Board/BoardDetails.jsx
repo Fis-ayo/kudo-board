@@ -17,13 +17,21 @@ export default function BoardDetails() {
         getCardsData();
     }, [])
 
-    return(
+    const handleCardUpdate = (newCard) => {
+        setCards(prev => prev.map(card => {
+            if(card.id === newCard.id)return newCard
+            else return card
+        }));
+    };
+
+    return (
         <div className="">
             <Link to="/">Back to Home</Link>
-            <CardList 
-            cards={cards}
-            setCards={setCards}/>
+            <CardList
+                cards={cards}
+                setCards={setCards}
+                onUpdate = {handleCardUpdate} />
         </div>
     )
-    
+
 }
