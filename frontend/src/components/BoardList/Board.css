@@ -65,9 +65,10 @@ body.dark .board-content p {
 }
 
 .view-btn {
-    background-color:var(--hover-color) ;
+    background-color: #f1f1f1;
     color: white;
 }
+
 
 .view-btn:hover {
     background-color: var(--main-color);

@@ -1,6 +1,6 @@
 :root {
-    --modal-bg: rgba(0, 0, 0, 0.85);
-    --modal-main: #1f1f1f;
+    --modal-bg: rgba(246, 239, 239, 0.85);
+    --modal-main: #fcf8f8;
 }
 
 .modal-overlay {
@@ -13,14 +13,14 @@
     overflow-y: auto;
     padding: 2rem;
     background-color: var(--modal-bg);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
     justify-content: center;
     align-items: center;
 }
 
 .modal-container {
     background-color: var(--modal-main);
-    color: white;
+    color: black;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;

@@ -39,7 +39,7 @@ export default function CardList({ cards, setCards, onUpdate }) {
                 <button
                     onClick={handleCardClick}
                     className="newCard">
-                + Create Card
+                 + Create Card
                 </button>
             </div>
             <section className="cardList-container">
