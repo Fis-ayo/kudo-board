@@ -17,6 +17,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
     next();
 })
+
     app.use('/api/boards', boardRoutes);
     boardRoutes.use('/', cardRoutes);
     cardRoutes.use('/', commentRoutes);

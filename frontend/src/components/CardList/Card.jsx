@@ -24,7 +24,7 @@ export default function Card({ item, onVote, onDelete, onUpdate }) {
     const handlePinClick = async () => {
         try {
             const updated = await getPin(params.id, item.id);
-            setIsPinned(updated.pinned);
+            setIsPinned(updated.data.pinned);
             onUpdate(updated);
         } catch (err) {
             console.error("Failed to pin or unpin", err);
