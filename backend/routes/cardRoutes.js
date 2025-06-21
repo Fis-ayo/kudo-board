@@ -1,10 +1,7 @@
-import express from 'express';
-import cors from 'cors';
-import prisma from '../utils/prisma_client.js';
+const  express = require( 'express')
+const  prisma = require( '../utils/prisma_client.js')
 
 const router = express.Router();
-router.use(cors());
-router.use(express.json())
 
 router.get('/:boardId/cards', async (req, res) => {
     const boardId = parseInt(req.params.boardId);
@@ -104,4 +101,4 @@ router.delete('/:boardId/cards/:cardId', async (req, res) => {
     }
 })
 
-export default router;
+module.exports = router

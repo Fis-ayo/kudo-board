@@ -1,10 +1,6 @@
-import cors from 'cors'
-import express from 'express'
-import prisma from '../utils/prisma_client.js'
-
+const express = require( 'express')
+const prisma = require( '../utils/prisma_client.js')
 const router = express.Router();
-router.use(cors())
-router.use(express.json())
 
 router.get('/', async (req, res) => {
     const { searchTerm } = req.query
@@ -59,4 +55,4 @@ router.delete('/:id', async (req, res) => {
 })
 
 
-export default router
+module.exports = router
