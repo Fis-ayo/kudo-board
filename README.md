@@ -4,7 +4,7 @@
 
 Submitted by: **NAME**
 
-Deployed Application (**required**): [Kudos Board Deployed Site]([(https://kudo-board-zvrh.onrender.com)])
+Deployed Application (**required**): [Kudos Board Deployed Site]([https://kudo-board-zvrh.onrender.com])
 
 ### Application Features
 
