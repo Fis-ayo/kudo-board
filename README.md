@@ -144,6 +144,15 @@ Deployed Application (**required**): [Kudos Board Deployed Site](https://kudo-bo
     </a>
   </div>
 
+  <div>
+    <a href="https://www.loom.com/share/c065eacee98c477bb2ea3600364962bf">
+      <p>Loom Message - 20 June 2025 - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/c065eacee98c477bb2ea3600364962bf">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/c065eacee98c477bb2ea3600364962bf-8a8672dff4aed564-full-play.gif">
+    </a>
+  </div>
+
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
